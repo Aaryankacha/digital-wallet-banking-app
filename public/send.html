@@ -1,0 +1,16 @@
+<div class="card">
+    <h2>Send Coins</h2>
+    <div ng-if="errorMessage" class="error">{{errorMessage}}</div>
+    <form ng-submit="sendMoney()">
+        <div class="form-group">
+            <label>Receiver Email</label>
+            <input type="email" ng-model="transaction.receiverEmail" placeholder="Enter receiver's email" required>
+        </div>
+        <div class="form-group">
+            <label>Amount (Coins)</label>
+            <input type="number" ng-model="transaction.amount" placeholder="Amount to send" required min="1">
+        </div>
+        <button type="submit" class="btn btn-primary">Confirm Transfer</button>
+        <a href="#!/dashboard" class="btn">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,187 @@
+/* Digital Wallet CSS */
+
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f7fa;
+    --accent-color: #50e3c2;
+    --text-color: #333;
+    --danger-color: #e94b3c;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --glass: rgba(255, 255, 255, 0.8);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Header & Footer */
+.main-header {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 10px 0;
+    box-shadow: var(--shadow);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Forms & Cards */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.error {
+    color: var(--danger-color);
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: #357abd;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: var(--white);
+    color: var(--primary-color);
+}
+
+/* Dashboard & Lists */
+.balance-card {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.balance-amount {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.transaction-list {
+    list-style: none;
+    padding: 0;
+}
+
+.transaction-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.trans-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.trans-amount {
+    font-weight: bold;
+}
+
+.trans-sent {
+    color: var(--danger-color);
+}
+
+.trans-received {
+    color: #2ecc71;
+}
