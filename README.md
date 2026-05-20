@@ -43,9 +43,9 @@ A full-stack web application built to simulate a simple digital wallet system. U
     ```
 4.  **Start MongoDB server:** Ensure your local MongoDB instance is running on the default port `27017`, or create a `.env` file with your Atlas connection string.
     *If `MONGODB_URI` is set but fails authentication, the app will automatically try your local MongoDB fallback.*
-    *To use the provided Atlas host and username, create a `.env` file like this:*
+    *Create a `.env` file like this:*
     ```powershell
-    MONGODB_URI=mongodb+srv://tylerriley001_db_user:TaWxade9vS90Sbp1@cluster0.deiwfow.mongodb.net/digital_wallet_db?retryWrites=true&w=majority
+    MONGODB_URI=mongodb+srv://<db_user>:<db_password>@<your_cluster_address>.mongodb.net/digital_wallet_db?retryWrites=true&w=majority
     ```
 5.  **Start the Express Server:**
     ```bash
