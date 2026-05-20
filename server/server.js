@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -16,12 +17,64 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
-const mongoURI = 'mongodb+srv://tylerriley001_db_user:NUUglIi4YiHxeBxV@cluster0.3qee7rh.mongodb.net/digital_wallet_db?retryWrites=true&w=majority';
+const localMongoURI = 'mongodb://127.0.0.1:27017/digital_wallet_db';
+const atlasHost = process.env.MONGODB_HOST || 'cluster0.3qee7rh.mongodb.net';
+const atlasUser = process.env.MONGODB_USER || 'tylerriley001_db_user';
+const atlasPassword = process.env.MONGODB_PASSWORD;
+const atlasDB = process.env.MONGODB_DB || 'digital_wallet_db';
+const envMongoURI = process.env.MONGODB_URI;
 
-mongoose.connect(mongoURI)
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch(err => console.error('MongoDB connection error:', err));
+let mongoURI;
+let connectionSource;
+if (envMongoURI) {
+    mongoURI = envMongoURI;
+    connectionSource = 'MONGODB_URI';
+} else if (atlasPassword) {
+    mongoURI = `mongodb+srv://${encodeURIComponent(atlasUser)}:${encodeURIComponent(atlasPassword)}@${atlasHost}/${atlasDB}?retryWrites=true&w=majority`;
+    connectionSource = 'Atlas env vars';
+} else {
+    mongoURI = localMongoURI;
+    connectionSource = 'local MongoDB';
+}
 
+const connectOptions = {
+    serverSelectionTimeoutMS: 10000
+};
+
+console.log(`Attempting MongoDB connection using ${connectionSource}`);
+
+(async () => {
+    try {
+        await mongoose.connect(mongoURI, connectOptions);
+    } catch (err) {
+        console.log('Mongoose connection error:', err);
+        if (envMongoURI || atlasPassword) {
+            console.log('Atlas auth failed; falling back to local MongoDB...');
+            try {
+                await mongoose.connect(localMongoURI, connectOptions);
+                connectionSource = 'local MongoDB';
+                console.log('Connected to local MongoDB on fallback');
+            } catch (localErr) {
+                console.log('Local MongoDB fallback also failed:', localErr);
+                process.exit(1);
+            }
+        } else {
+            process.exit(1);
+        }
+    }
+})();
+
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose connected');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log('Mongoose error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose disconnected');
+});
 // --- Auth APIs ---
 
 // POST /register: Create a new user and assign initial wallet balance

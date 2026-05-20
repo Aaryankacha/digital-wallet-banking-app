@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global reset & base ─────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-white text-gray-900;
+    @apply dark:bg-dark-bg dark:text-gray-100;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-brand-500 rounded-full; }
+}
+
+/* ── Reusable component classes ──────────────────────────────── */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-sm;
+    @apply dark:border-dark-border dark:bg-dark-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5
+           bg-brand-500 text-white font-semibold text-sm
+           hover:bg-brand-600 active:scale-95
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-400;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5
+           bg-transparent text-brand-500 font-semibold text-sm
+           hover:bg-brand-50 dark:hover:bg-brand-900/30
+           transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm
+           placeholder:text-gray-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
+    @apply dark:border-dark-border dark:bg-dark-card dark:text-gray-100 dark:focus:ring-brand-800;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ── Select dark-mode fix ────────────────────────────────────── */
+select.input-field {
+  color-scheme: light;
+}
+.dark select.input-field {
+  color-scheme: dark;
+}
+

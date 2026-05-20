@@ -26,8 +26,9 @@ A full-stack web application built to simulate a simple digital wallet system. U
 
 ## Prerequisites
 
-*   Node.js (v14+ recommended)
-*   MongoDB installed and running locally
+*   Node.js (v18+ recommended)
+*   MongoDB installed and running locally, or an Atlas connection string set via `MONGODB_URI`
+*   If using Atlas, the recommended way is to create a `.env` file with `MONGODB_URI`.
 
 ## Installation & Setup
 
@@ -40,10 +41,15 @@ A full-stack web application built to simulate a simple digital wallet system. U
     ```bash
     npm install
     ```
-4.  **Start MongoDB server:** Ensure your local MongoDB instance is running on the default port `27017`.
+4.  **Start MongoDB server:** Ensure your local MongoDB instance is running on the default port `27017`, or create a `.env` file with your Atlas connection string.
+    *If `MONGODB_URI` is set but fails authentication, the app will automatically try your local MongoDB fallback.*
+    *To use the provided Atlas host and username, create a `.env` file like this:*
+    ```powershell
+    MONGODB_URI=mongodb+srv://tylerriley001_db_user:TaWxade9vS90Sbp1@cluster0.deiwfow.mongodb.net/digital_wallet_db?retryWrites=true&w=majority
+    ```
 5.  **Start the Express Server:**
     ```bash
-    node server/server.js
+    npm start
     ```
     *The server will start on `http://localhost:5000`.*
 6.  **Run the Frontend:** Open the `public/index.html` file in your preferred web browser.
