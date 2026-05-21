@@ -13,7 +13,13 @@ const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://digital-wallet-banking-app-uh23.vercel.app',
+    'http://localhost:5173'
+  ],
+  credentials: true
+}));
 app.use(bodyParser.json());
 
 // MongoDB Connection

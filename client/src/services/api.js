@@ -5,10 +5,9 @@ import axios from 'axios';
  * Automatically attaches JWT Bearer token from localStorage.
  */
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
   headers: { 'Content-Type': 'application/json' },
 });
-
 // Request interceptor – inject token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('dw_token');
