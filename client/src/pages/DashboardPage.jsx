@@ -43,9 +43,10 @@ export default function DashboardPage() {
   const { data: txData,      loading: txLoading,  execute: fetchTx }      = useAsync(getTransactions);
 
   const refresh = useCallback(() => {
-    fetchBalance();
-    fetchTx();
-  }, [fetchBalance, fetchTx]);
+  if (!user?.email) return;
+  fetchBalance(user.email);
+  fetchTx(user.email);
+}, [fetchBalance, fetchTx, user]);
 
   useEffect(() => { refresh(); }, [refresh]);
 
