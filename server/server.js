@@ -5,9 +5,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
-const User = require('../models/User');
-const Wallet = require('../models/Wallet');
-const Transaction = require('../models/Transaction');
+const User = require('./models/User');
+const Wallet = require('./models/Wallet');
+const Transaction = require('./models/Transaction');
 
 const app = express();
 const PORT = 5000;
