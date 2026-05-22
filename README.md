@@ -1,83 +1,162 @@
-# Digital Wallet Banking System
+# PayWave 💸
+### Full Stack Fintech Web App — Peer-to-Peer Digital Wallet
 
-A full-stack web application built to simulate a simple digital wallet system. Users can register, start with an initial balance, send coins to other users, and view their transaction history.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-paywave--wallet.vercel.app-blue?style=for-the-badge&logo=vercel)](https://paywave-wallet.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/Aaryankacha/digital-wallet-banking-app)
 
-## Technology Stack
+---
 
-*   **Frontend:** HTML5, CSS3 (Modern, responsive UI), AngularJS (1.x)
-*   **Backend:** Node.js, Express.js
-*   **Database:** MongoDB via Mongoose
-*   **Authentication:** BCrypt (Password Hashing)
+## 🚀 Live Demo
 
-## Features
+👉 **[https://paywave-wallet.vercel.app](https://paywave-wallet.vercel.app)**
 
-1.  **User Authentication:**
-    *   Registration with automatic initial balance assignment (1000 Coins).
-    *   Secure login using hashed passwords.
-    *   Session management via `localStorage`.
-2.  **Dashboard:**
-    *   Real-time view of the current wallet balance.
-    *   Quick actions to access Send or History pages.
-3.  **Peer-to-Peer Transfers:**
-    *   Send coins to any registered user via their email address.
-    *   Validation checks to prevent overdrafts (insufficient balance) and self-transfers.
-4.  **Transaction History:**
-    *   Chronological list of all incoming and outgoing transfers with timestamps.
+> Test credentials — register a new account or use:
+> - Email: `test@paywave.com` | Password: `test1234`
 
-## Prerequisites
+---
 
-*   Node.js (v18+ recommended)
-*   MongoDB installed and running locally, or an Atlas connection string set via `MONGODB_URI`
-*   If using Atlas, the recommended way is to create a `.env` file with `MONGODB_URI`.
+## 📌 About
 
-## Installation & Setup
+PayWave is a full-stack digital wallet application simulating real-world fintech flows like GPay and Paytm. Users can register, send money peer-to-peer, scan QR codes, view transaction history, and track spending via an analytics dashboard — all in real time.
 
-1.  **Clone or download the repository.**
-2.  **Navigate to the project root directory:**
-    ```bash
-    cd digital-wallet-system
-    ```
-3.  **Install backend dependencies:**
-    ```bash
-    npm install
-    ```
-4.  **Start MongoDB server:** Ensure your local MongoDB instance is running on the default port `27017`, or create a `.env` file with your Atlas connection string.
-    *If `MONGODB_URI` is set but fails authentication, the app will automatically try your local MongoDB fallback.*
-    *Create a `.env` file like this:*
-    ```powershell
-    MONGODB_URI=mongodb+srv://<db_user>:<db_password>@<your_cluster_address>.mongodb.net/digital_wallet_db?retryWrites=true&w=majority
-    ```
-5.  **Start the Express Server:**
-    ```bash
-    npm start
-    ```
-    *The server will start on `http://localhost:5000`.*
-6.  **Run the Frontend:** Open the `public/index.html` file in your preferred web browser.
+---
 
-## API Endpoints
+## ✨ Features
 
-*   `POST /api/register`: Register a new user (`name`, `email`, `password`).
-*   `POST /api/login`: Authenticate an existing user (`email`, `password`).
-*   `GET /api/balance/:email`: Fetch the current balance for the given user.
-*   `POST /api/sendMoney`: Transfer funds (`senderEmail`, `receiverEmail`, `amount`).
-*   `GET /api/transactions/:email`: Retrieve the transaction history for the given user.
+- 🔐 **JWT Authentication** — Secure login and registration with bcrypt password hashing
+- 💸 **P2P Transfers** — Send coins instantly to any registered user via email
+- 📷 **QR Code Payments** — Generate and scan QR codes for fast transfers
+- 📊 **Spending Analytics** — Category-wise breakdown of transactions with charts
+- 🕓 **Transaction History** — Full chronological log of all incoming and outgoing transfers
+- 🌓 **Dark Mode** — Full dark/light theme support
+- 📱 **Responsive UI** — Works on mobile and desktop
 
-## Project Structure
+---
 
-```text
-digital-wallet-system/
-├── public/                 # AngularJS Frontend files
-│   ├── index.html
-│   ├── app.js              # Controllers and Routing
-│   ├── style.css
-│   └── *.html              # Various views (login, dashboard, etc.)
-├── server/
-│   └── server.js           # Main Express server and API routes
-├── models/                 # Mongoose Data Models
-│   ├── User.js
-│   ├── Wallet.js
-│   └── Transaction.js
-└── package.json            # Project dependencies
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, Tailwind CSS, Recharts, QRCode.react |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas (Mongoose) |
+| Auth | JWT, bcryptjs |
+| Deployment | Vercel (Frontend) · Railway (Backend) |
+
+---
+
+## 📁 Project Structure
+
 ```
-"# digital-wallet-system" 
-"# force deploy" 
+paywave/
+├── client/                 # React frontend (Vite)
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── pages/          # Route-level pages
+│   │   ├── services/       # Axios API calls
+│   │   ├── context/        # Auth context
+│   │   └── hooks/          # Custom React hooks
+│   └── vite.config.js
+│
+└── server/                 # Node.js backend
+    ├── models/             # Mongoose schemas (User, Wallet, Transaction)
+    ├── server.js           # Express server + API routes
+    └── package.json
+```
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/register` | Register new user + create wallet |
+| POST | `/api/login` | Authenticate user |
+| GET | `/api/balance/:email` | Get wallet balance |
+| POST | `/api/sendMoney` | Transfer funds between users |
+| GET | `/api/transactions/:email` | Get transaction history |
+
+---
+
+## ⚙️ Local Setup
+
+### Prerequisites
+- Node.js v18+
+- MongoDB Atlas account (or local MongoDB)
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/Aaryankacha/digital-wallet-banking-app.git
+cd digital-wallet-banking-app
+```
+
+### 2. Setup Backend
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside `server/`:
+```env
+MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+```
+
+Start the backend:
+```bash
+node server.js
+```
+
+### 3. Setup Frontend
+```bash
+cd client
+npm install
+```
+
+Create a `.env` file inside `client/`:
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+Start the frontend:
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🌐 Deployment
+
+| Service | Platform | URL |
+|---|---|---|
+| Frontend | Vercel | [paywave-wallet.vercel.app](https://paywave-wallet.vercel.app/login) |
+| Backend | Railway | Auto-deployed from GitHub |
+| Database | MongoDB Atlas | Cloud hosted |
+
+---
+
+## 🔒 Security Features
+
+- Passwords hashed with **bcrypt** (salt rounds: 10)
+- **JWT tokens** for stateless authentication
+- **CORS** restricted to production frontend URL
+- Environment variables for all secrets — never committed to Git
+
+---
+
+## 👨‍💻 Author
+
+**Aryan Kacha**
+- 📧 aryannkacha@gmail.com
+- 🔗 [LinkedIn](https://linkedin.com/in/aaryankacha)
+- 💻 [GitHub](https://github.com/Aaryankacha)
+- 🌐 [Portfolio](https://yourportfolio.com)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
